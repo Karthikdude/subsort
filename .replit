@@ -1,0 +1,39 @@
+modules = ["python-3.11"]
+
+[nix]
+channel = "stable-24_05"
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "SubSort CLI Tool"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "subsort_test"
+
+[[workflows.workflow]]
+name = "SubSort CLI Tool"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pip install aiohttp click rich beautifulsoup4 lxml && python main.py --help"
+
+[[workflows.workflow]]
+name = "subsort_test"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pip install aiohttp click rich beautifulsoup4 lxml && python main.py --help"
+
+[deployment]
+run = ["sh", "-c", "pip install aiohttp click rich beautifulsoup4 lxml && python main.py --help"]
