@@ -79,14 +79,6 @@ mode = "sequential"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "python main.py --help"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "python main.py -i test_subdomains.txt --status --silent --timeout 10"
-
-[[workflows.workflow.tasks]]
-task = "shell.exec"
 args = "python test_all_features.py"
 
 [deployment]
