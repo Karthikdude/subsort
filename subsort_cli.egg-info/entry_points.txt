@@ -1,0 +1,2 @@
+[console_scripts]
+subsort = subsort.cli:main
