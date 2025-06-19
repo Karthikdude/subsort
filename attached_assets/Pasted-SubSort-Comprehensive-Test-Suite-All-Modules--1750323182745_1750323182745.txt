@@ -1,0 +1,521 @@
+SubSort Comprehensive Test Suite - All Modules
+================================================================================
+
+Running test 1/20...
+
+================================================================================
+TEST: 01 - Help Command
+COMMAND: python main.py --help
+================================================================================
+STDOUT:
+
+STDERR:
+Traceback (most recent call last):
+  File "/home/runner/workspace/main.py", line 18, in <module>
+    from subsort.cli import main
+  File "/home/runner/workspace/subsort/cli.py", line 15, in <module>
+    from .core.scanner import SubdomainScanner
+  File "/home/runner/workspace/subsort/core/scanner.py", line 15, in <module>
+    from .http_client import AsyncHttpClient
+  File "/home/runner/workspace/subsort/core/http_client.py", line 281
+    ```
+    ^
+SyntaxError: invalid syntax
+
+EXIT CODE: 1
+EXPECTED KEYWORDS: ['SubSort', 'Options', 'Enhanced CLI']
+FOUND KEYWORDS: ['SubSort']
+❌ Critical error detected: syntaxerror
+❌ TEST FAILED
+
+Running test 2/20...
+
+================================================================================
+TEST: 02 - Basic Status Check
+COMMAND: python main.py -i test_small.txt --status --silent --timeout 15
+================================================================================
+STDOUT:
+
+STDERR:
+Traceback (most recent call last):
+  File "/home/runner/workspace/main.py", line 18, in <module>
+    from subsort.cli import main
+  File "/home/runner/workspace/subsort/cli.py", line 15, in <module>
+    from .core.scanner import SubdomainScanner
+  File "/home/runner/workspace/subsort/core/scanner.py", line 15, in <module>
+    from .http_client import AsyncHttpClient
+  File "/home/runner/workspace/subsort/core/http_client.py", line 281
+    ```
+    ^
+SyntaxError: invalid syntax
+
+EXIT CODE: 1
+❌ Critical error detected: syntaxerror
+❌ TEST FAILED
+
+Running test 3/20...
+
+================================================================================
+TEST: 03 - Status + Server Modules
+COMMAND: python main.py -i test_small.txt --status --server --silent --timeout 15
+================================================================================
+STDOUT:
+
+STDERR:
+Traceback (most recent call last):
+  File "/home/runner/workspace/main.py", line 18, in <module>
+    from subsort.cli import main
+  File "/home/runner/workspace/subsort/cli.py", line 15, in <module>
+    from .core.scanner import SubdomainScanner
+  File "/home/runner/workspace/subsort/core/scanner.py", line 15, in <module>
+    from .http_client import AsyncHttpClient
+  File "/home/runner/workspace/subsort/core/http_client.py", line 281
+    ```
+    ^
+SyntaxError: invalid syntax
+
+EXIT CODE: 1
+❌ Critical error detected: syntaxerror
+❌ TEST FAILED
+
+Running test 4/20...
+
+================================================================================
+TEST: 04 - Status + Title Modules
+COMMAND: python main.py -i test_small.txt --status --title --silent --timeout 15
+================================================================================
+STDOUT:
+
+STDERR:
+Traceback (most recent call last):
+  File "/home/runner/workspace/main.py", line 18, in <module>
+    from subsort.cli import main
+  File "/home/runner/workspace/subsort/cli.py", line 15, in <module>
+    from .core.scanner import SubdomainScanner
+  File "/home/runner/workspace/subsort/core/scanner.py", line 15, in <module>
+    from .http_client import AsyncHttpClient
+  File "/home/runner/workspace/subsort/core/http_client.py", line 281
+    ```
+    ^
+SyntaxError: invalid syntax
+
+EXIT CODE: 1
+❌ Critical error detected: syntaxerror
+❌ TEST FAILED
+
+Running test 5/20...
+
+================================================================================
+TEST: 05 - Core Modules (Status + Server + Title)
+COMMAND: python main.py -i test_small.txt --status --server --title --silent --timeout 15
+================================================================================
+STDOUT:
+
+STDERR:
+Traceback (most recent call last):
+  File "/home/runner/workspace/main.py", line 18, in <module>
+    from subsort.cli import main
+  File "/home/runner/workspace/subsort/cli.py", line 15, in <module>
+    from .core.scanner import SubdomainScanner
+  File "/home/runner/workspace/subsort/core/scanner.py", line 15, in <module>
+    from .http_client import AsyncHttpClient
+  File "/home/runner/workspace/subsort/core/http_client.py", line 281
+    ```
+    ^
+SyntaxError: invalid syntax
+
+EXIT CODE: 1
+❌ Critical error detected: syntaxerror
+❌ TEST FAILED
+
+Running test 6/20...
+
+================================================================================
+TEST: 06 - Tech Stack Detection
+COMMAND: python main.py -i test_small.txt --techstack --silent --timeout 15
+================================================================================
+STDOUT:
+
+STDERR:
+Traceback (most recent call last):
+  File "/home/runner/workspace/main.py", line 18, in <module>
+    from subsort.cli import main
+  File "/home/runner/workspace/subsort/cli.py", line 15, in <module>
+    from .core.scanner import SubdomainScanner
+  File "/home/runner/workspace/subsort/core/scanner.py", line 15, in <module>
+    from .http_client import AsyncHttpClient
+  File "/home/runner/workspace/subsort/core/http_client.py", line 281
+    ```
+    ^
+SyntaxError: invalid syntax
+
+EXIT CODE: 1
+❌ Critical error detected: syntaxerror
+❌ TEST FAILED
+
+Running test 7/20...
+
+================================================================================
+TEST: 07 - Virtual Host Detection
+COMMAND: python main.py -i test_small.txt --vhost --silent --timeout 15
+================================================================================
+STDOUT:
+
+STDERR:
+Traceback (most recent call last):
+  File "/home/runner/workspace/main.py", line 18, in <module>
+    from subsort.cli import main
+  File "/home/runner/workspace/subsort/cli.py", line 15, in <module>
+    from .core.scanner import SubdomainScanner
+  File "/home/runner/workspace/subsort/core/scanner.py", line 15, in <module>
+    from .http_client import AsyncHttpClient
+  File "/home/runner/workspace/subsort/core/http_client.py", line 281
+    ```
+    ^
+SyntaxError: invalid syntax
+
+EXIT CODE: 1
+❌ Critical error detected: syntaxerror
+❌ TEST FAILED
+
+Running test 8/20...
+
+================================================================================
+TEST: 08 - Response Time Analysis
+COMMAND: python main.py -i test_small.txt --responsetime --silent --timeout 15
+================================================================================
+STDOUT:
+
+STDERR:
+Traceback (most recent call last):
+  File "/home/runner/workspace/main.py", line 18, in <module>
+    from subsort.cli import main
+  File "/home/runner/workspace/subsort/cli.py", line 15, in <module>
+    from .core.scanner import SubdomainScanner
+  File "/home/runner/workspace/subsort/core/scanner.py", line 15, in <module>
+    from .http_client import AsyncHttpClient
+  File "/home/runner/workspace/subsort/core/http_client.py", line 281
+    ```
+    ^
+SyntaxError: invalid syntax
+
+EXIT CODE: 1
+❌ Critical error detected: syntaxerror
+❌ TEST FAILED
+
+Running test 9/20...
+
+================================================================================
+TEST: 09 - Favicon Hash Generation
+COMMAND: python main.py -i test_small.txt --faviconhash --silent --timeout 15
+================================================================================
+STDOUT:
+
+STDERR:
+Traceback (most recent call last):
+  File "/home/runner/workspace/main.py", line 18, in <module>
+    from subsort.cli import main
+  File "/home/runner/workspace/subsort/cli.py", line 15, in <module>
+    from .core.scanner import SubdomainScanner
+  File "/home/runner/workspace/subsort/core/scanner.py", line 15, in <module>
+    from .http_client import AsyncHttpClient
+  File "/home/runner/workspace/subsort/core/http_client.py", line 281
+    ```
+    ^
+SyntaxError: invalid syntax
+
+EXIT CODE: 1
+❌ Critical error detected: syntaxerror
+❌ TEST FAILED
+
+Running test 10/20...
+
+================================================================================
+TEST: 10 - Robots.txt Analysis
+COMMAND: python main.py -i test_small.txt --robots --silent --timeout 15
+================================================================================
+STDOUT:
+
+STDERR:
+Traceback (most recent call last):
+  File "/home/runner/workspace/main.py", line 18, in <module>
+    from subsort.cli import main
+  File "/home/runner/workspace/subsort/cli.py", line 15, in <module>
+    from .core.scanner import SubdomainScanner
+  File "/home/runner/workspace/subsort/core/scanner.py", line 15, in <module>
+    from .http_client import AsyncHttpClient
+  File "/home/runner/workspace/subsort/core/http_client.py", line 281
+    ```
+    ^
+SyntaxError: invalid syntax
+
+EXIT CODE: 1
+❌ Critical error detected: syntaxerror
+❌ TEST FAILED
+
+Running test 11/20...
+
+================================================================================
+TEST: 11 - JavaScript Extraction
+COMMAND: python main.py -i test_small.txt --js --silent --timeout 15
+================================================================================
+STDOUT:
+
+STDERR:
+Traceback (most recent call last):
+  File "/home/runner/workspace/main.py", line 18, in <module>
+    from subsort.cli import main
+  File "/home/runner/workspace/subsort/cli.py", line 15, in <module>
+    from .core.scanner import SubdomainScanner
+  File "/home/runner/workspace/subsort/core/scanner.py", line 15, in <module>
+    from .http_client import AsyncHttpClient
+  File "/home/runner/workspace/subsort/core/http_client.py", line 281
+    ```
+    ^
+SyntaxError: invalid syntax
+
+EXIT CODE: 1
+❌ Critical error detected: syntaxerror
+❌ TEST FAILED
+
+Running test 12/20...
+
+================================================================================
+TEST: 12 - Authentication Detection
+COMMAND: python main.py -i test_small.txt --auth --silent --timeout 15
+================================================================================
+STDOUT:
+
+STDERR:
+Traceback (most recent call last):
+  File "/home/runner/workspace/main.py", line 18, in <module>
+    from subsort.cli import main
+  File "/home/runner/workspace/subsort/cli.py", line 15, in <module>
+    from .core.scanner import SubdomainScanner
+  File "/home/runner/workspace/subsort/core/scanner.py", line 15, in <module>
+    from .http_client import AsyncHttpClient
+  File "/home/runner/workspace/subsort/core/http_client.py", line 281
+    ```
+    ^
+SyntaxError: invalid syntax
+
+EXIT CODE: 1
+❌ Critical error detected: syntaxerror
+❌ TEST FAILED
+
+Running test 13/20...
+
+================================================================================
+TEST: 13 - Output to File (TXT)
+COMMAND: python main.py -i test_small.txt --status --server -o test_output.txt --silent --timeout 15
+================================================================================
+STDOUT:
+
+STDERR:
+Traceback (most recent call last):
+  File "/home/runner/workspace/main.py", line 18, in <module>
+    from subsort.cli import main
+  File "/home/runner/workspace/subsort/cli.py", line 15, in <module>
+    from .core.scanner import SubdomainScanner
+  File "/home/runner/workspace/subsort/core/scanner.py", line 15, in <module>
+    from .http_client import AsyncHttpClient
+  File "/home/runner/workspace/subsort/core/http_client.py", line 281
+    ```
+    ^
+SyntaxError: invalid syntax
+
+EXIT CODE: 1
+❌ File not created: test_output.txt
+❌ Critical error detected: syntaxerror
+❌ TEST FAILED
+
+Running test 14/20...
+
+================================================================================
+TEST: 14 - Output to JSON
+COMMAND: python main.py -i test_small.txt --status --server -o test_output.json --output-format json --silent --timeout 15
+================================================================================
+STDOUT:
+
+STDERR:
+Traceback (most recent call last):
+  File "/home/runner/workspace/main.py", line 18, in <module>
+    from subsort.cli import main
+  File "/home/runner/workspace/subsort/cli.py", line 15, in <module>
+    from .core.scanner import SubdomainScanner
+  File "/home/runner/workspace/subsort/core/scanner.py", line 15, in <module>
+    from .http_client import AsyncHttpClient
+  File "/home/runner/workspace/subsort/core/http_client.py", line 281
+    ```
+    ^
+SyntaxError: invalid syntax
+
+EXIT CODE: 1
+❌ File not created: test_output.json
+❌ Critical error detected: syntaxerror
+❌ TEST FAILED
+
+Running test 15/20...
+
+================================================================================
+TEST: 15 - Individual Module Files
+COMMAND: python main.py -i test_small.txt --status --server --individual --silent --timeout 15
+================================================================================
+STDOUT:
+
+STDERR:
+Traceback (most recent call last):
+  File "/home/runner/workspace/main.py", line 18, in <module>
+    from subsort.cli import main
+  File "/home/runner/workspace/subsort/cli.py", line 15, in <module>
+    from .core.scanner import SubdomainScanner
+  File "/home/runner/workspace/subsort/core/scanner.py", line 15, in <module>
+    from .http_client import AsyncHttpClient
+  File "/home/runner/workspace/subsort/core/http_client.py", line 281
+    ```
+    ^
+SyntaxError: invalid syntax
+
+EXIT CODE: 1
+❌ Critical error detected: syntaxerror
+❌ TEST FAILED
+
+Running test 16/20...
+
+================================================================================
+TEST: 16 - Status Code Filtering
+COMMAND: python main.py -i test_small.txt --status -mc 200 --silent --timeout 15
+================================================================================
+STDOUT:
+
+STDERR:
+Traceback (most recent call last):
+  File "/home/runner/workspace/main.py", line 18, in <module>
+    from subsort.cli import main
+  File "/home/runner/workspace/subsort/cli.py", line 15, in <module>
+    from .core.scanner import SubdomainScanner
+  File "/home/runner/workspace/subsort/core/scanner.py", line 15, in <module>
+    from .http_client import AsyncHttpClient
+  File "/home/runner/workspace/subsort/core/http_client.py", line 281
+    ```
+    ^
+SyntaxError: invalid syntax
+
+EXIT CODE: 1
+❌ Critical error detected: syntaxerror
+❌ TEST FAILED
+
+Running test 17/20...
+
+================================================================================
+TEST: 17 - Plain Text Output
+COMMAND: python main.py -i test_small.txt --status --plain-text --silent --timeout 15
+================================================================================
+STDOUT:
+
+STDERR:
+Traceback (most recent call last):
+  File "/home/runner/workspace/main.py", line 18, in <module>
+    from subsort.cli import main
+  File "/home/runner/workspace/subsort/cli.py", line 15, in <module>
+    from .core.scanner import SubdomainScanner
+  File "/home/runner/workspace/subsort/core/scanner.py", line 15, in <module>
+    from .http_client import AsyncHttpClient
+  File "/home/runner/workspace/subsort/core/http_client.py", line 281
+    ```
+    ^
+SyntaxError: invalid syntax
+
+EXIT CODE: 1
+❌ Critical error detected: syntaxerror
+❌ TEST FAILED
+
+Running test 18/20...
+
+================================================================================
+TEST: 18 - High Thread Count
+COMMAND: python main.py -i test_small.txt --status --threads 20 --silent --timeout 15
+================================================================================
+STDOUT:
+
+STDERR:
+Traceback (most recent call last):
+  File "/home/runner/workspace/main.py", line 18, in <module>
+    from subsort.cli import main
+  File "/home/runner/workspace/subsort/cli.py", line 15, in <module>
+    from .core.scanner import SubdomainScanner
+  File "/home/runner/workspace/subsort/core/scanner.py", line 15, in <module>
+    from .http_client import AsyncHttpClient
+  File "/home/runner/workspace/subsort/core/http_client.py", line 281
+    ```
+    ^
+SyntaxError: invalid syntax
+
+EXIT CODE: 1
+❌ Critical error detected: syntaxerror
+❌ TEST FAILED
+
+Running test 19/20...
+
+================================================================================
+TEST: 19 - All Advanced Modules
+COMMAND: python main.py -i test_small.txt --techstack --vhost --responsetime --faviconhash --robots --silent --timeout 20
+================================================================================
+STDOUT:
+
+STDERR:
+Traceback (most recent call last):
+  File "/home/runner/workspace/main.py", line 18, in <module>
+    from subsort.cli import main
+  File "/home/runner/workspace/subsort/cli.py", line 15, in <module>
+    from .core.scanner import SubdomainScanner
+  File "/home/runner/workspace/subsort/core/scanner.py", line 15, in <module>
+    from .http_client import AsyncHttpClient
+  File "/home/runner/workspace/subsort/core/http_client.py", line 281
+    ```
+    ^
+SyntaxError: invalid syntax
+
+EXIT CODE: 1
+❌ Critical error detected: syntaxerror
+❌ TEST FAILED
+
+Running test 20/20...
+
+================================================================================
+TEST: 20 - Full Module Suite
+COMMAND: python main.py -i test_small.txt --status --server --title --techstack --vhost --responsetime --faviconhash --robots --js --auth --silent --timeout 25
+================================================================================
+STDOUT:
+
+STDERR:
+Traceback (most recent call last):
+  File "/home/runner/workspace/main.py", line 18, in <module>
+    from subsort.cli import main
+  File "/home/runner/workspace/subsort/cli.py", line 15, in <module>
+    from .core.scanner import SubdomainScanner
+  File "/home/runner/workspace/subsort/core/scanner.py", line 15, in <module>
+    from .http_client import AsyncHttpClient
+  File "/home/runner/workspace/subsort/core/http_client.py", line 281
+    ```
+    ^
+SyntaxError: invalid syntax
+
+EXIT CODE: 1
+❌ Critical error detected: syntaxerror
+❌ TEST FAILED
+
+================================================================================
+COMPREHENSIVE TEST SUMMARY
+================================================================================
+TOTAL TESTS: 20
+PASSED: 0
+FAILED: 20
+SUCCESS RATE: 0.0%
+TOTAL TIME: 26.2 seconds
+AVERAGE TIME PER TEST: 1.3 seconds
+Cleaned up: test_subdomains.txt
+Cleaned up: test_small.txt
+
+❌ 20 TESTS FAILED!
+🔧 Please check the failed tests above for issues.

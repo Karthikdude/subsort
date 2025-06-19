@@ -5,7 +5,7 @@ channel = "stable-24_05"
 packages = ["cacert", "xcodebuild", "zlib"]
 
 [workflows]
-runButton = "Test Fixed SubSort"
+runButton = "comprehsive"
 
 [[workflows.workflow]]
 name = "Project"
@@ -80,6 +80,15 @@ mode = "sequential"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "python test_all_features.py"
+
+[[workflows.workflow]]
+name = "comprehsive"
+mode = "sequential"
+author = 44017300
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python test_comprehensive.py"
 
 [deployment]
 run = ["sh", "-c", "pip install aiohttp click rich beautifulsoup4 lxml && python main.py --help"]

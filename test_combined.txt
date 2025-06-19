@@ -1,8 +1,0 @@
-google.com | "Google"
-github.com | "GitHub · Build and ship software on a single, c..."
-stackoverflow.com | "Just a moment..."
-httpbin.org | "httpbin.org"
-example.com | "Example Domain"
-news.ycombinator.com | "Hacker News"
-reddit.com | "No title found"
-twitter.com
