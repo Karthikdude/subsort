@@ -1,8 +1,0 @@
-google.com
-github.com
-stackoverflow.com
-httpbin.org
-example.com
-news.ycombinator.com
-reddit.com
-twitter.com
