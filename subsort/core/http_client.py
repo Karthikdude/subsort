@@ -278,4 +278,3 @@ class AsyncHttpClient:
                 return (response_dict, content, final_url)
 
         return http_result
-```
