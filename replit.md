@@ -106,15 +106,16 @@ subsort/
 
 ## Recent Changes
 
-- June 19, 2025: Complete implementation of SubSort CLI tool with all core modules
-  - Implemented modular architecture with Status, Server, and Title modules
-  - Added async HTTP client with anti-detection features
-  - Created comprehensive CLI interface with Click framework
-  - Added support for multiple output formats (TXT, JSON, CSV)
-  - Implemented rich terminal output with progress bars
-  - Added proper error handling and logging system
-  - Successfully tested with real-world subdomains
-  - Created comprehensive documentation and examples
+- June 19, 2025: Enhanced SubSort CLI tool with professional styling and global installation
+  - Implemented professional UI with gradient ASCII banner and enhanced styling
+  - Added modern terminal interface with rich tables, icons, and color coding
+  - Created global installation system with setup.py and pyproject.toml configuration
+  - Enhanced help system with emojis and interactive examples (--examples flag)
+  - Improved command-line interface with professional option descriptions
+  - Added comprehensive README with installation guides and usage examples
+  - Created installation script (install.sh) for one-command global setup
+  - Successfully tested enhanced UI with real subdomain analysis
+  - Updated project structure for PyPI distribution readiness
 
 ## Changelog
 

@@ -1,6 +1,50 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
-name = "repl-nix-workspace"
-version = "0.1.0"
-description = "Add your description here"
-requires-python = ">=3.11"
-dependencies = []
+name = "subsort-cli"
+version = "1.0.0"
+description = "Enhanced CLI reconnaissance tool for subdomain analysis"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Karthik S Sathyan", email = "karthik@subsort.dev"}
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Internet",
+    "Topic :: Security",
+    "Topic :: System :: Networking",
+    "Topic :: Utilities",
+]
+keywords = ["subdomain", "reconnaissance", "security", "pentest", "cybersecurity", "cli"]
+requires-python = ">=3.8"
+dependencies = [
+    "aiohttp>=3.8.0",
+    "click>=8.1.0",
+    "rich>=13.0.0",
+    "beautifulsoup4>=4.12.0",
+    "lxml>=4.9.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/karthiksathyan/subsort"
+Repository = "https://github.com/karthiksathyan/subsort"
+Issues = "https://github.com/karthiksathyan/subsort/issues"
+Documentation = "https://github.com/karthiksathyan/subsort/wiki"
+
+[project.scripts]
+subsort = "subsort.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["subsort*"]

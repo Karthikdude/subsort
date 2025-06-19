@@ -16,6 +16,7 @@ from .core.scanner import SubdomainScanner
 from .utils.logger import setup_logger
 from .utils.output import OutputManager
 from .utils.helpers import validate_file, read_subdomains_from_file
+from .ui import print_enhanced_banner, create_enhanced_progress, create_results_table, print_scan_summary, print_help_enhancement
 
 console = Console()
 
@@ -33,69 +34,91 @@ Developed by Karthik S Sathyan
     """
     console.print(Panel(Text(banner, style="cyan bold"), border_style="blue"))
 
-@click.command()
+@click.command(context_settings=dict(help_option_names=['-h', '--help']))
 @click.option('-i', '--input', 'input_file', 
-              help='Input file containing subdomains (one per line)')
+              help='📁 Input file containing subdomains (one per line)')
 @click.option('-o', '--output', 'output_file',
-              help='Output file to save results')
+              help='💾 Output file to save results')
 @click.option('--status', is_flag=True, default=False,
-              help='Check HTTP status codes')
+              help='🔍 Check HTTP status codes and connectivity')
 @click.option('--server', is_flag=True, default=False,
-              help='Extract server information from headers')
+              help='🖥️ Extract server information and security headers')
 @click.option('--title', is_flag=True, default=False,
-              help='Extract page titles')
+              help='📝 Extract page titles and content analysis')
 @click.option('--threads', default=50, type=int,
-              help='Number of concurrent threads (default: 50, max: 200)')
+              help='⚡ Number of concurrent threads (default: 50, max: 200)')
 @click.option('--timeout', default=5, type=int,
-              help='Request timeout in seconds (default: 5)')
+              help='⏱️ Request timeout in seconds (default: 5)')
 @click.option('--retries', default=3, type=int,
-              help='Number of retry attempts (default: 3)')
+              help='🔄 Number of retry attempts per request (default: 3)')
 @click.option('--delay', default=0, type=float,
-              help='Delay between requests in seconds (default: 0)')
+              help='⏳ Delay between requests in seconds (default: 0)')
 @click.option('-v', '--verbose', is_flag=True, default=False,
-              help='Enable verbose logging')
+              help='📊 Enable detailed verbose logging')
 @click.option('--log-file', 
-              help='Custom log file path')
+              help='📋 Custom log file path for detailed logs')
 @click.option('--output-format', 
               type=click.Choice(['txt', 'json', 'csv'], case_sensitive=False),
               default='txt',
-              help='Output format (default: txt)')
+              help='📄 Output format: txt, json, or csv (default: txt)')
 @click.option('--no-color', is_flag=True, default=False,
-              help='Disable colored output')
+              help='🎨 Disable colored terminal output')
 @click.option('--progress-bar', is_flag=True, default=True,
-              help='Show progress bar (default: enabled)')
+              help='📈 Show enhanced progress bar (default: enabled)')
 @click.option('--silent', is_flag=True, default=False,
-              help='Suppress banner and non-essential output')
+              help='🔇 Suppress banner and non-essential output')
 @click.option('--user-agent',
               default='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-              help='Custom User-Agent string')
+              help='🕵️ Custom User-Agent string for requests')
 @click.option('--follow-redirects', is_flag=True, default=True,
-              help='Follow HTTP redirects (default: enabled)')
+              help='🔄 Follow HTTP redirects automatically (default: enabled)')
 @click.option('--ignore-ssl', is_flag=True, default=False,
-              help='Ignore SSL certificate errors')
+              help='🔓 Ignore SSL certificate verification errors')
+@click.option('--examples', is_flag=True, default=False,
+              help='📚 Show usage examples and exit')
 def main(input_file: Optional[str], output_file: Optional[str], status: bool,
          server: bool, title: bool, threads: int, timeout: int, retries: int,
          delay: float, verbose: bool, log_file: Optional[str], 
          output_format: str, no_color: bool, progress_bar: bool, 
          silent: bool, user_agent: str, follow_redirects: bool, 
-         ignore_ssl: bool):
+         ignore_ssl: bool, examples: bool):
     """
-    SubSort - Enhanced CLI Recon Tool for subdomain analysis
+    SubSort - Enhanced CLI Reconnaissance Tool for subdomain analysis
     
-    Examples:
+    A high-performance, async-powered subdomain analysis framework with
+    professional-grade reconnaissance capabilities.
     
     \b
-    # Basic status check from file
+    🚀 QUICK START EXAMPLES:
+    
+    \b
+    # Basic connectivity scan
     subsort -i subdomains.txt --status
     
     \b
-    # Comprehensive scan with all modules
-    subsort -i subs.txt --status --server --title -v
+    # Full reconnaissance scan
+    subsort -i targets.txt --status --server --title -v
     
     \b
-    # High performance scan with custom settings
-    subsort -i targets.txt --status --threads 100 --timeout 10
+    # High-performance scanning
+    subsort -i domains.txt --status --threads 100 --timeout 10
+    
+    \b
+    # Professional JSON output
+    subsort -i subs.txt --status --server --title -o results.json --output-format json
+    
+    \b
+    # Silent operation for automation
+    subsort -i domains.txt --status --silent
+    
+    \b
+    📚 For more examples: subsort --examples
     """
+    
+    # Handle examples flag
+    if examples:
+        print_help_enhancement()
+        return
     
     # Validate thread count
     if threads > 200:
@@ -105,9 +128,9 @@ def main(input_file: Optional[str], output_file: Optional[str], status: bool,
         console.print("[red]Error: Thread count must be at least 1[/red]")
         sys.exit(1)
     
-    # Show banner unless silent mode is enabled
+    # Show enhanced banner unless silent mode is enabled
     if not silent:
-        print_banner()
+        print_enhanced_banner()
     
     # Setup logging
     logger = setup_logger(verbose, log_file)
@@ -190,15 +213,31 @@ def main(input_file: Optional[str], output_file: Optional[str], status: bool,
             console.print(f"[blue]Modules: {', '.join(scanner.get_enabled_modules())}[/blue]")
             console.print(f"[blue]Threads: {threads}, Timeout: {timeout}s[/blue]\n")
         
-        # Run async scan with proper cleanup
+        # Run async scan with enhanced progress tracking
         async def run_scan():
             async with scanner:
-                return await scanner.scan_subdomains(subdomains, show_progress=progress_bar)
+                if progress_bar and not silent:
+                    progress = create_enhanced_progress()
+                    with progress:
+                        task = progress.add_task("🔍 Scanning subdomains...", total=len(subdomains))
+                        results = await scanner.scan_subdomains(subdomains, show_progress=False)
+                        progress.update(task, completed=len(subdomains))
+                        return results
+                else:
+                    return await scanner.scan_subdomains(subdomains, show_progress=False)
         
         results = asyncio.run(run_scan())
         
-        # Process and save results
-        output_manager.save_results(results, scanner.get_enabled_modules())
+        # Enhanced results display
+        if not silent and not output_file:
+            console.print("\n")
+            results_table = create_results_table(results, scanner.get_enabled_modules())
+            console.print(results_table)
+            console.print("\n")
+            print_scan_summary(results, scanner.get_enabled_modules())
+        elif output_file:
+            # Process and save results
+            output_manager.save_results(results, scanner.get_enabled_modules())
         
         if not silent:
             console.print(f"\n[green]Scan completed successfully![/green]")

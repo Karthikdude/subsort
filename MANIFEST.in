@@ -1,0 +1,7 @@
+include README.md
+include LICENSE
+include install.sh
+include requirements.txt
+recursive-include subsort *.py
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
