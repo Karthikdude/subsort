@@ -1,4 +1,0 @@
-google.com | "Google"
-github.com | "GitHub · Build and ship software on a single, c..."
-example.com | "Example Domain"
-httpbin.org | "httpbin.org"
