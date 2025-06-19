@@ -72,11 +72,11 @@ class TitleModule(BaseModule):
                 headers = response.get('headers', {})
             else:
                 headers = getattr(response, 'headers', {})
-            
+
             # Convert headers to dict if needed
             if hasattr(headers, 'items'):
                 headers = dict(headers)
-            
+
             # Only process HTML content
             content_type = headers.get('content-type', headers.get('Content-Type', '')).lower()
             if 'text/html' not in content_type:
