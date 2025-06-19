@@ -67,9 +67,18 @@ class TitleModule(BaseModule):
                     'has_title': False
                 }
 
+            # Handle both response object and dictionary
+            if isinstance(response, dict):
+                headers = response.get('headers', {})
+            else:
+                headers = getattr(response, 'headers', {})
+            
+            # Convert headers to dict if needed
+            if hasattr(headers, 'items'):
+                headers = dict(headers)
+            
             # Only process HTML content
-            headers = response.get('headers', {})
-            content_type = headers.get('content-type', '').lower()
+            content_type = headers.get('content-type', headers.get('Content-Type', '')).lower()
             if 'text/html' not in content_type:
                 return {
                     'title': 'Non-HTML content',
@@ -106,6 +115,26 @@ class TitleModule(BaseModule):
 
     def extract_description(self, content: str) -> str:
         """Extract description from HTML content"""
+        for pattern in self.description_patterns:
+            match = pattern.search(content)
+            if match:
+                description = self.clean_text(match.group(1))
+                if description:
+                    return description
+        return ""
+
+    def _extract_title_from_html(self, content: str) -> str:
+        """Extract title from HTML content using patterns"""
+        for pattern in self.title_patterns:
+            match = pattern.search(content)
+            if match:
+                title = self.clean_text(match.group(1))
+                if title:
+                    return title
+        return "No title found"
+
+    def _extract_meta_description(self, content: str) -> str:
+        """Extract meta description from HTML content"""
         for pattern in self.description_patterns:
             match = pattern.search(content)
             if match:

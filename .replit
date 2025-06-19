@@ -72,5 +72,22 @@ mode = "sequential"
 task = "shell.exec"
 args = "python main.py -i demo_subdomains.txt --status --server --techstack --individual -o test_with_individual.txt -v"
 
+[[workflows.workflow]]
+name = "Test Fixed SubSort"
+author = 44017300
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python main.py --help"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python main.py -i test_subdomains.txt --status --silent --timeout 10"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python test_all_features.py"
+
 [deployment]
 run = ["sh", "-c", "pip install aiohttp click rich beautifulsoup4 lxml && python main.py --help"]

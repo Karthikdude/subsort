@@ -22,42 +22,36 @@ class StatusModule(BaseModule):
         result = {}
 
         try:
-            self.log_debug(f"Checking status for {subdomain}")
-
             response, content, final_url = await self.http_client.check_both_schemes(subdomain)
 
             if response is None:
-                return {
+                result.update({
                     'accessible': False,
                     'status_code': None,
-                    'status_message': 'Connection failed',
-                    'status_category': 'error',
-                    'final_url': None,
-                    'scheme': None
-                }
+                    'status_category': 'unreachable',
+                    'final_url': None
+                })
+            else:
+                # Handle both response object and dictionary
+                if isinstance(response, dict):
+                    status_code = response.get('status_code', response.get('status', 0))
+                else:
+                    status_code = getattr(response, 'status', getattr(response, 'status_code', 0))
 
-            # Extract scheme from final URL
-            scheme = 'https' if final_url.startswith('https') else 'http'
-
-            # Categorize status code
-            status_code = response.get('status_code')
-            category = self._categorize_status_code(status_code)
-
-            return {
-                'accessible': True,
-                'status_code': status_code,
-                'status_message': response.get('status_message', ''),
-                'status_category': category,
-                'final_url': final_url,
-                'scheme': scheme,
-                'redirect_chain': []
-            }
+                result.update({
+                    'accessible': True,
+                    'status_code': status_code,
+                    'status_category': self.categorize_status(status_code),
+                    'final_url': final_url,
+                    'response_size': len(content) if content else 0
+                })
 
         except Exception as e:
-            result['accessible'] = False
-            result['status_error'] = str(e)
-            result['status_category'] = 'error'
-            result['status_message'] = 'Error'
+            result.update({
+                'accessible': False,
+                'status_error': str(e),
+                'status_category': 'error'
+            })
             self.log_error(f"Status check failed: {e}", subdomain)
 
         return result

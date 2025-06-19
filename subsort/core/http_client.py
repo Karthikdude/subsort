@@ -40,7 +40,7 @@ class AsyncHttpClient:
             'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0',
             'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:89.0) Gecko/20100101 Firefox/89.0'
         ]
-        
+
         self.timeout = self.config.get('timeout', 5)
         self.retries = self.config.get('retries', 3)
         self.follow_redirects = self.config.get('follow_redirects', True)
@@ -86,7 +86,7 @@ class AsyncHttpClient:
         )
 
         self.logger.debug("HTTP session created successfully")
-        
+
     async def _create_session(self):
         """Internal method to create session"""
         ssl_context = ssl.create_default_context()
@@ -238,17 +238,43 @@ class AsyncHttpClient:
             return f"{scheme}://{subdomain}"
         return subdomain
 
-    async def check_both_schemes(self, subdomain: str) -> Tuple[Optional[Dict[str, Any]], Optional[str], str]:
-        """Check both HTTP and HTTPS schemes, return the working one"""
-        schemes = ['https', 'http']
+    async def check_both_schemes(self, subdomain: str) -> Tuple[Any, str, str]:
+        """
+        Check both HTTP and HTTPS schemes for a subdomain
 
-        for scheme in schemes:
-            url = self.format_url(subdomain, scheme)
-            response, content = await self.get(url)
+        Args:
+            subdomain: The subdomain to check
 
-            if response is not None and response.get('status_code'):
-                self.logger.debug(f"Successfully connected to {url}")
-                return response, content, url
+        Returns:
+            Tuple of (response_dict, content, final_url)
+        """
+        # Try HTTPS first
+        https_result = await self.make_request(f"https://{subdomain}")
+        if https_result[0] is not None:
+            response, content, final_url = https_result
+            # Convert response to consistent dict format
+            if hasattr(response, 'status'):
+                response_dict = {
+                    'status': response.status,
+                    'status_code': response.status,
+                    'headers': dict(response.headers) if hasattr(response.headers, 'items') else response.headers,
+                    'url': str(response.url) if hasattr(response, 'url') else final_url
+                }
+                return (response_dict, content, final_url)
+            return https_result
 
-        self.logger.debug(f"No working scheme found for {subdomain}")
-        return None, None, ""
+        # Fall back to HTTP
+        http_result = await self.make_request(f"http://{subdomain}")
+        if http_result[0] is not None:
+            response, content, final_url = http_result
+            # Convert response to consistent dict format
+            if hasattr(response, 'status'):
+                response_dict = {
+                    'status': response.status,
+                    'status_code': response.status,
+                    'headers': dict(response.headers) if hasattr(response.headers, 'items') else response.headers,
+                    'url': str(response.url) if hasattr(response, 'url') else final_url
+                }
+                return (response_dict, content, final_url)
+
+        return http_result
