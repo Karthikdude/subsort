@@ -1,0 +1,29 @@
+SubSort Faviconhash Module Results
+Generated: 2025-06-19 08:34:52
+Total Subdomains: 8
+------------------------------------------------------------
+
+Subdomain: google.com
+  Favicon Accessible: False
+
+Subdomain: github.com
+  Favicon Accessible: False
+
+Subdomain: stackoverflow.com
+  Favicon Accessible: False
+
+Subdomain: httpbin.org
+  Favicon Accessible: False
+
+Subdomain: example.com
+  Favicon Accessible: False
+
+Subdomain: news.ycombinator.com
+  Favicon Accessible: False
+
+Subdomain: reddit.com
+  Favicon Accessible: False
+
+Subdomain: twitter.com
+  Favicon Accessible: False
+

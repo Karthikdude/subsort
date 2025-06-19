@@ -1,0 +1,29 @@
+SubSort Techstack Module Results
+Generated: 2025-06-19 08:36:03
+Total Subdomains: 4
+------------------------------------------------------------
+
+Subdomain: google.com
+  Technologies: []
+  Security: []
+  Analytics: []
+  Frontend: []
+
+Subdomain: github.com
+  Technologies: []
+  Security: []
+  Analytics: []
+  Frontend: []
+
+Subdomain: example.com
+  Technologies: []
+  Security: []
+  Analytics: []
+  Frontend: []
+
+Subdomain: httpbin.org
+  Technologies: []
+  Security: []
+  Analytics: []
+  Frontend: []
+

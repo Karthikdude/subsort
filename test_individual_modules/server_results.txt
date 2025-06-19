@@ -1,0 +1,17 @@
+SubSort Server Module Results
+Generated: 2025-06-19 08:36:03
+Total Subdomains: 4
+------------------------------------------------------------
+
+Subdomain: google.com
+  No server data available
+
+Subdomain: github.com
+  No server data available
+
+Subdomain: example.com
+  No server data available
+
+Subdomain: httpbin.org
+  No server data available
+

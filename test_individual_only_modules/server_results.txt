@@ -1,0 +1,29 @@
+SubSort Server Module Results
+Generated: 2025-06-19 08:35:05
+Total Subdomains: 8
+------------------------------------------------------------
+
+Subdomain: google.com
+  No server data available
+
+Subdomain: github.com
+  No server data available
+
+Subdomain: stackoverflow.com
+  No server data available
+
+Subdomain: httpbin.org
+  No server data available
+
+Subdomain: example.com
+  No server data available
+
+Subdomain: news.ycombinator.com
+  No server data available
+
+Subdomain: reddit.com
+  No server data available
+
+Subdomain: twitter.com
+  No server data available
+

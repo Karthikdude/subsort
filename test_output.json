@@ -1,0 +1,42 @@
+{
+  "timestamp": "2025-06-19T08:35:53.398784",
+  "total_subdomains": 4,
+  "results": [
+    {
+      "subdomain": "google.com",
+      "timestamp": 1750322152,
+      "accessible": false,
+      "status_error": "'int' object has no attribute 'status'",
+      "status_category": "error",
+      "status_message": "Error",
+      "server_error": "'int' object has no attribute 'headers'"
+    },
+    {
+      "subdomain": "github.com",
+      "timestamp": 1750322152,
+      "accessible": false,
+      "status_error": "'int' object has no attribute 'status'",
+      "status_category": "error",
+      "status_message": "Error",
+      "server_error": "'int' object has no attribute 'headers'"
+    },
+    {
+      "subdomain": "example.com",
+      "timestamp": 1750322152,
+      "accessible": false,
+      "status_error": "'int' object has no attribute 'status'",
+      "status_category": "error",
+      "status_message": "Error",
+      "server_error": "'int' object has no attribute 'headers'"
+    },
+    {
+      "subdomain": "httpbin.org",
+      "timestamp": 1750322152,
+      "accessible": false,
+      "status_error": "'int' object has no attribute 'status'",
+      "status_category": "error",
+      "status_message": "Error",
+      "server_error": "'int' object has no attribute 'headers'"
+    }
+  ]
+}
