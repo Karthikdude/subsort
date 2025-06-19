@@ -153,8 +153,14 @@ subsort -i subdomains.txt --status -mc 200
 # Filter by error codes (only show 404 Not Found)
 subsort -i subdomains.txt --status -mc 404
 
+# Plain text output (simple format: domain.com | 200 | server | title)
+subsort -i subdomains.txt --status --server --title --plain-text
+
 # Combine filtering with individual module files
 subsort -i subdomains.txt --status --server --title -mc 200 --individual
+
+# Plain text with status code filtering
+subsort -i subdomains.txt --status --server -mc 200 --plain-text
 
 # Verbose logging with custom user agent
 subsort -i subdomains.txt --status --server --title -v --user-agent "CustomBot/1.0"
@@ -209,6 +215,7 @@ subsort --examples     # Show comprehensive usage examples
 | `--output-format` | 📄 Output format: txt, json, or csv | txt |
 | `--silent` | 🔇 Suppress banner and non-essential output | disabled |
 | `--no-color` | 🎨 Disable colored terminal output | disabled |
+| `--plain-text` | 📝 Display/save results in plain text format (domain.com \| 200) | disabled |
 
 ### Advanced Options
 
@@ -217,6 +224,8 @@ subsort --examples     # Show comprehensive usage examples
 | `--user-agent` | 🕵️ Custom User-Agent string for requests | Mozilla/5.0... |
 | `--follow-redirects` | 🔄 Follow HTTP redirects automatically | enabled |
 | `--ignore-ssl` | 🔓 Ignore SSL certificate verification errors | disabled |
+| `--individual` | 📂 Save individual module results as separate txt files | disabled |
+| `-mc, --match-code` | 🎯 Filter results by specific HTTP status code | none |
 
 ## Professional Output Display
 

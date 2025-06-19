@@ -132,6 +132,8 @@ Developed by Karthik S Sathyan
               help='📂 Save individual module results as separate txt files')
 @click.option('-mc', '--match-code', type=int,
               help='🎯 Filter results by specific HTTP status code (e.g., 200, 404)')
+@click.option('--plain-text', is_flag=True, default=False,
+              help='📝 Display/save results in plain text format without styling (domain.com | 200)')
 @click.option('--examples', is_flag=True, default=False,
               help='📚 Show usage examples and exit')
 def main(input_file: Optional[str], output_file: Optional[str], status: bool,
@@ -144,7 +146,8 @@ def main(input_file: Optional[str], output_file: Optional[str], status: bool,
          retries: int, delay: float, verbose: bool, log_file: Optional[str], 
          output_format: str, no_color: bool, progress_bar: bool, 
          silent: bool, user_agent: str, follow_redirects: bool, 
-         ignore_ssl: bool, individual: bool, match_code: Optional[int], examples: bool):
+         ignore_ssl: bool, individual: bool, match_code: Optional[int], 
+         plain_text: bool, examples: bool):
     """
     SubSort - Enhanced CLI Reconnaissance Tool for subdomain analysis
     
@@ -181,6 +184,10 @@ def main(input_file: Optional[str], output_file: Optional[str], status: bool,
     \b
     # Filter by status code
     subsort -i domains.txt --status -mc 200
+    
+    \b
+    # Plain text output (simple format)
+    subsort -i domains.txt --status --plain-text
     
     \b
     📚 For more examples: subsort --examples
@@ -269,7 +276,7 @@ def main(input_file: Optional[str], output_file: Optional[str], status: bool,
     }
     
     # Initialize output manager
-    output_manager = OutputManager(output_file, output_format, individual, match_code)
+    output_manager = OutputManager(output_file, output_format, individual, match_code, plain_text)
     
     # Create and configure scanner
     scanner = SubdomainScanner(config, logger)

@@ -13,11 +13,12 @@ class OutputManager:
     """Manages output formatting and saving for scan results"""
     
     def __init__(self, output_file: Optional[str] = None, output_format: str = 'txt', 
-                 individual: bool = False, match_code: Optional[int] = None):
+                 individual: bool = False, match_code: Optional[int] = None, plain_text: bool = False):
         self.output_file = output_file
         self.output_format = output_format.lower()
         self.individual = individual
         self.match_code = match_code
+        self.plain_text = plain_text
         
     def save_results(self, results: List[Dict[str, Any]], enabled_modules: List[str]):
         """
@@ -48,7 +49,10 @@ class OutputManager:
                     self._save_individual_module_files(filtered_results, output_path, enabled_modules)
         else:
             # Print to console
-            self._print_results(filtered_results, enabled_modules)
+            if self.plain_text:
+                self._print_plain_text(filtered_results, enabled_modules)
+            else:
+                self._print_results(filtered_results, enabled_modules)
     
     def _filter_by_status_code(self, results: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """Filter results by status code if match_code is specified"""
@@ -105,40 +109,82 @@ class OutputManager:
     def _save_txt(self, results: List[Dict[str, Any]], output_path: Path, enabled_modules: List[str]):
         """Save results in text format"""
         with open(output_path, 'w', encoding='utf-8') as f:
-            f.write(f"SubSort Scan Results\n")
-            f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-            f.write(f"Total Subdomains: {len(results)}\n")
-            f.write(f"Enabled Modules: {', '.join(enabled_modules)}\n")
-            f.write("-" * 80 + "\n\n")
-            
-            for result in results:
-                subdomain = result.get('subdomain', 'Unknown')
-                f.write(f"Subdomain: {subdomain}\n")
+            if self.plain_text:
+                # Plain text format - simple line by line
+                for result in results:
+                    line_parts = []
+                    subdomain = result.get('subdomain', 'Unknown')
+                    line_parts.append(subdomain)
+                    
+                    # Add status if enabled
+                    if 'status' in enabled_modules and 'status_code' in result:
+                        line_parts.append(str(result['status_code']))
+                    
+                    # Add server if enabled
+                    if 'server' in enabled_modules and 'server' in result:
+                        line_parts.append(result['server'])
+                    
+                    # Add title if enabled
+                    if 'title' in enabled_modules and 'title' in result:
+                        title = result['title'].replace('\n', ' ').replace('\r', ' ')
+                        if len(title) > 50:
+                            title = title[:47] + "..."
+                        line_parts.append(f'"{title}"')
+                    
+                    # Add other module data
+                    for module in enabled_modules:
+                        if module in ['status', 'server', 'title']:
+                            continue
+                        
+                        # Add specific fields for each module
+                        if module == 'techstack' and 'technologies' in result:
+                            techs = result['technologies']
+                            if isinstance(techs, list) and techs:
+                                line_parts.append(f"techs:{','.join(techs[:3])}")
+                        elif module == 'responsetime' and 'response_time' in result:
+                            rt = result['response_time']
+                            if rt:
+                                line_parts.append(f"time:{rt:.0f}ms")
+                        elif module == 'vhost' and 'is_vhost' in result:
+                            line_parts.append(f"vhost:{result['is_vhost']}")
+                    
+                    f.write(" | ".join(line_parts) + "\n")
+            else:
+                # Regular formatted output
+                f.write(f"SubSort Scan Results\n")
+                f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+                f.write(f"Total Subdomains: {len(results)}\n")
+                f.write(f"Enabled Modules: {', '.join(enabled_modules)}\n")
+                f.write("-" * 80 + "\n\n")
                 
-                # Status information
-                if 'status_code' in result:
-                    status = result['status_code']
-                    message = result.get('status_message', '')
-                    url = result.get('url', '')
-                    f.write(f"  Status: {status} {message} ({url})\n")
-                
-                # Server information
-                if 'server' in result:
-                    f.write(f"  Server: {result['server']}\n")
-                
-                # Title information
-                if 'title' in result:
-                    f.write(f"  Title: {result['title']}\n")
-                
-                # Additional information
-                for key, value in result.items():
-                    if key not in ['subdomain', 'status_code', 'status_message', 'url', 'server', 'title', 'timestamp']:
-                        if isinstance(value, (list, dict)):
-                            f.write(f"  {key.replace('_', ' ').title()}: {json.dumps(value)}\n")
-                        else:
-                            f.write(f"  {key.replace('_', ' ').title()}: {value}\n")
-                
-                f.write("\n")
+                for result in results:
+                    subdomain = result.get('subdomain', 'Unknown')
+                    f.write(f"Subdomain: {subdomain}\n")
+                    
+                    # Status information
+                    if 'status_code' in result:
+                        status = result['status_code']
+                        message = result.get('status_message', '')
+                        url = result.get('url', '')
+                        f.write(f"  Status: {status} {message} ({url})\n")
+                    
+                    # Server information
+                    if 'server' in result:
+                        f.write(f"  Server: {result['server']}\n")
+                    
+                    # Title information
+                    if 'title' in result:
+                        f.write(f"  Title: {result['title']}\n")
+                    
+                    # Additional information
+                    for key, value in result.items():
+                        if key not in ['subdomain', 'status_code', 'status_message', 'url', 'server', 'title', 'timestamp']:
+                            if isinstance(value, (list, dict)):
+                                f.write(f"  {key.replace('_', ' ').title()}: {json.dumps(value)}\n")
+                            else:
+                                f.write(f"  {key.replace('_', ' ').title()}: {value}\n")
+                    
+                    f.write("\n")
     
     def _print_results(self, results: List[Dict[str, Any]], enabled_modules: List[str]):
         """Print results to console"""
@@ -196,6 +242,82 @@ class OutputManager:
         console.print(f"\n[blue]Total: {len(results)} subdomains processed[/blue]")
         if self.match_code:
             console.print(f"[yellow]Filtered by status code: {self.match_code}[/yellow]")
+    
+    def _print_plain_text(self, results: List[Dict[str, Any]], enabled_modules: List[str]):
+        """Print results in plain text format"""
+        for result in results:
+            line_parts = []
+            subdomain = result.get('subdomain', 'Unknown')
+            line_parts.append(subdomain)
+            
+            # Add status if enabled
+            if 'status' in enabled_modules and 'status_code' in result:
+                line_parts.append(str(result['status_code']))
+            
+            # Add server if enabled
+            if 'server' in enabled_modules and 'server' in result:
+                line_parts.append(result['server'])
+            
+            # Add title if enabled
+            if 'title' in enabled_modules and 'title' in result:
+                title = result['title'].replace('\n', ' ').replace('\r', ' ')
+                if len(title) > 50:
+                    title = title[:47] + "..."
+                line_parts.append(f'"{title}"')
+            
+            # Add other module data
+            for module in enabled_modules:
+                if module in ['status', 'server', 'title']:
+                    continue
+                
+                # Add specific fields for each module
+                if module == 'techstack' and 'technologies' in result:
+                    techs = result['technologies']
+                    if isinstance(techs, list) and techs:
+                        line_parts.append(f"techs:{','.join(techs[:3])}")
+                elif module == 'responsetime' and 'response_time' in result:
+                    rt = result['response_time']
+                    if rt:
+                        line_parts.append(f"time:{rt:.0f}ms")
+                elif module == 'vhost' and 'is_vhost' in result:
+                    line_parts.append(f"vhost:{result['is_vhost']}")
+                elif module == 'faviconhash' and 'favicon_hash' in result:
+                    fh = result['favicon_hash']
+                    if fh:
+                        line_parts.append(f"favicon:{fh[:10]}...")
+                elif module == 'robots' and 'robots_accessible' in result:
+                    line_parts.append(f"robots:{result['robots_accessible']}")
+                elif module == 'js' and 'js_files' in result:
+                    js_files = result['js_files']
+                    if isinstance(js_files, list) and js_files:
+                        line_parts.append(f"js_files:{len(js_files)}")
+                elif module == 'auth' and 'requires_auth' in result:
+                    line_parts.append(f"auth:{result['requires_auth']}")
+                elif module == 'jsvuln' and 'vulnerable_js' in result:
+                    vuln_js = result['vulnerable_js']
+                    if isinstance(vuln_js, list) and vuln_js:
+                        line_parts.append(f"js_vulns:{len(vuln_js)}")
+                elif module == 'loginpanels' and 'login_panels' in result:
+                    panels = result['login_panels']
+                    if isinstance(panels, list) and panels:
+                        line_parts.append(f"login_panels:{len(panels)}")
+                elif module == 'jwt' and 'jwt_tokens' in result:
+                    tokens = result['jwt_tokens']
+                    if isinstance(tokens, list) and tokens:
+                        line_parts.append(f"jwt_tokens:{len(tokens)}")
+                elif module == 'cname' and 'cname_records' in result:
+                    records = result['cname_records']
+                    if isinstance(records, list) and records:
+                        line_parts.append(f"cname:{len(records)}")
+            
+            print(" | ".join(line_parts))
+        
+        # Simple summary for plain text
+        total = len(results)
+        accessible = len([r for r in results if r.get('accessible', False)])
+        print(f"\nTotal: {total} | Accessible: {accessible}")
+        if self.match_code:
+            print(f"Filtered by status code: {self.match_code}")
     
     def _save_individual_module_files(self, results: List[Dict[str, Any]], output_path: Path, enabled_modules: List[str]):
         """Save individual result files for each module"""

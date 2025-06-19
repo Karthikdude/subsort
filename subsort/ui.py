@@ -245,6 +245,9 @@ def print_help_enhancement():
         ("Basic scan", "subsort -i domains.txt --status"),
         ("Full analysis", "subsort -i domains.txt --status --server --title -v"),
         ("JSON output", "subsort -i domains.txt --status -o results.json --output-format json"),
+        ("Plain text output", "subsort -i domains.txt --status --server --plain-text"),
+        ("Filter by status code", "subsort -i domains.txt --status -mc 200"),
+        ("Individual module files", "subsort -i domains.txt --status --server --individual"),
         ("Silent mode", "subsort -i domains.txt --status --silent"),
         ("High performance", "subsort -i domains.txt --status --threads 100")
     ]
