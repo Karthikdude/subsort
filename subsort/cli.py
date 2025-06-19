@@ -22,16 +22,16 @@ console = Console()
 
 def print_banner():
     """Print the SubSort banner"""
-    banner = r"""
+    banner = """
  ____        _     ____             _   
 / ___| _   _| |__ / ___|  ___  _ __| |_ 
 \___ \| | | | '_ \\___ \ / _ \| '__| __|
  ___) | |_| | |_) |___) | (_) | |  | |_ 
 |____/ \__,_|_.__/|____/ \___/|_|   \__|
-
+                                        
 Enhanced CLI Recon Tool v1.0.0
 Developed by Karthik S Sathyan
-"""
+    """
     console.print(Panel(Text(banner, style="cyan bold"), border_style="blue"))
 
 @click.command(context_settings=dict(help_option_names=['-h', '--help']))
