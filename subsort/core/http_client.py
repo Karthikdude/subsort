@@ -240,41 +240,17 @@ class AsyncHttpClient:
 
     async def check_both_schemes(self, subdomain: str) -> Tuple[Any, str, str]:
         """
-        Check both HTTP and HTTPS schemes for a subdomain
-
-        Args:
-            subdomain: The subdomain to check
-
-        Returns:
-            Tuple of (response_dict, content, final_url)
+        Check both HTTP and HTTPS schemes for a subdomain.
+        Tries HTTPS first, then falls back to HTTP if the connection fails.
         """
-        # Try HTTPS first
-        https_result = await self.make_request(f"https://{subdomain}")
-        if https_result[0] is not None:
-            response, content, final_url = https_result
-            # Convert response to consistent dict format
-            if hasattr(response, 'status'):
-                response_dict = {
-                    'status': response.status,
-                    'status_code': response.status,
-                    'headers': dict(response.headers) if hasattr(response.headers, 'items') else response.headers,
-                    'url': str(response.url) if hasattr(response, 'url') else final_url
-                }
-                return (response_dict, content, final_url)
-            return https_result
+        https_url = self.format_url(subdomain, 'https')
+        response, content, final_url = await self.make_request(https_url)
 
-        # Fall back to HTTP
-        http_result = await self.make_request(f"http://{subdomain}")
-        if http_result[0] is not None:
-            response, content, final_url = http_result
-            # Convert response to consistent dict format
-            if hasattr(response, 'status'):
-                response_dict = {
-                    'status': response.status,
-                    'status_code': response.status,
-                    'headers': dict(response.headers) if hasattr(response.headers, 'items') else response.headers,
-                    'url': str(response.url) if hasattr(response, 'url') else final_url
-                }
-                return (response_dict, content, final_url)
+        # If HTTPS fails with a connection error, try HTTP
+        if response and isinstance(response, dict) and 'error' in response:
+            if 'cannot connect' in response['error'].lower() or 'timeout' in response['error'].lower():
+                self.logger.debug(f"HTTPS failed for {subdomain}, trying HTTP.")
+                http_url = self.format_url(subdomain, 'http')
+                return await self.make_request(http_url)
 
-        return http_result
+        return response, content, final_url
