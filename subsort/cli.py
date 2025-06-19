@@ -45,6 +45,60 @@ Developed by Karthik S Sathyan
               help='🖥️ Extract server information and security headers')
 @click.option('--title', is_flag=True, default=False,
               help='📝 Extract page titles and content analysis')
+@click.option('--techstack', is_flag=True, default=False,
+              help='🔧 Detect and sort subdomains based on their tech stack')
+@click.option('--vhost', is_flag=True, default=False,
+              help='🌐 Perform virtual host-based detection and save accordingly')
+@click.option('--responsetime', is_flag=True, default=False,
+              help='⏱️ Measure response times and sort subdomains based on latency')
+@click.option('--faviconhash', is_flag=True, default=False,
+              help='🎭 Generate favicon hashes to identify technologies or services')
+@click.option('--robots', is_flag=True, default=False,
+              help='🤖 Fetch and parse robots.txt and sitemap.xml for hidden endpoints')
+@click.option('--js', is_flag=True, default=False,
+              help='📜 Extract and download linked JavaScript files for analysis')
+@click.option('--auth', is_flag=True, default=False,
+              help='🔐 Detect presence of login portals or authentication-requiring endpoints')
+@click.option('--jsvuln', is_flag=True, default=False,
+              help='⚠️ Identify outdated/vulnerable JavaScript libraries and their versions')
+@click.option('--loginpanels', is_flag=True, default=False,
+              help='🚪 Detect and list login portals and auth forms across all subdomains')
+@click.option('--jwt', is_flag=True, default=False,
+              help='🔑 Extract and decode JWT tokens from headers or responses')
+@click.option('--cname', is_flag=True, default=False,
+              help='📋 Check CNAME records for possible subdomain takeover')
+@click.option('--iphistory', is_flag=True, default=False,
+              help='📊 Check historical IP records to track infrastructure changes')
+@click.option('--httpmethods', is_flag=True, default=False,
+              help='🔧 Discover supported HTTP methods like OPTIONS, PUT, DELETE')
+@click.option('--port', is_flag=True, default=False,
+              help='🔌 Perform port scanning and group based on open ports')
+@click.option('--ssl', is_flag=True, default=False,
+              help='🔒 Collect SSL certificate details (expiry, CN, issuer)')
+@click.option('--headers', is_flag=True, default=False,
+              help='📋 Analyze and store security-related headers like CSP, HSTS')
+@click.option('--content', is_flag=True, default=False,
+              help='📄 Sort based on Content-Type (text/html, application/json, etc.)')
+@click.option('--cors', is_flag=True, default=False,
+              help='🌍 Detect CORS configuration issues or wildcards')
+@click.option('--cdn', is_flag=True, default=False,
+              help='☁️ Identify and group based on CDN or hosting provider')
+@click.option('--length', is_flag=True, default=False,
+              help='📏 Sort subdomains based on Content-Length or response similarity')
+@click.option('--geoip', is_flag=True, default=False,
+              help='🌎 Sort based on country, ASN, or IP origin')
+@click.option('--cms', is_flag=True, default=False,
+              help='💻 Detect CMS (e.g., WordPress, Joomla) and organize results')
+@click.option('--waf', is_flag=True, default=False,
+              help='🛡️ Detect WAF and categorize accordingly (e.g., Cloudflare, Akamai)')
+@click.option('--cloudassets', is_flag=True, default=False,
+              help='☁️ Discover exposed S3 buckets, Azure blobs, or Google Cloud storage')
+@click.option('--dirscan', is_flag=True, default=False,
+              help='📁 Discover common endpoints/directories (/admin, /api, etc.)')
+@click.option('--wappalyzer', is_flag=True, default=False,
+              help='🔍 Use Wappalyzer to identify frontend/backend technologies')
+@click.option('--vulnscan', is_flag=True, default=False,
+              help='🚨 Run vulnerability fingerprints using custom signatures')
 @click.option('--threads', default=50, type=int,
               help='⚡ Number of concurrent threads (default: 50, max: 200)')
 @click.option('--timeout', default=5, type=int,
@@ -77,8 +131,13 @@ Developed by Karthik S Sathyan
 @click.option('--examples', is_flag=True, default=False,
               help='📚 Show usage examples and exit')
 def main(input_file: Optional[str], output_file: Optional[str], status: bool,
-         server: bool, title: bool, threads: int, timeout: int, retries: int,
-         delay: float, verbose: bool, log_file: Optional[str], 
+         server: bool, title: bool, techstack: bool, vhost: bool, responsetime: bool,
+         faviconhash: bool, robots: bool, js: bool, auth: bool, jsvuln: bool,
+         loginpanels: bool, jwt: bool, cname: bool, iphistory: bool, httpmethods: bool,
+         port: bool, ssl: bool, headers: bool, content: bool, cors: bool, cdn: bool,
+         length: bool, geoip: bool, cms: bool, waf: bool, cloudassets: bool,
+         dirscan: bool, wappalyzer: bool, vulnscan: bool, threads: int, timeout: int, 
+         retries: int, delay: float, verbose: bool, log_file: Optional[str], 
          output_format: str, no_color: bool, progress_bar: bool, 
          silent: bool, user_agent: str, follow_redirects: bool, 
          ignore_ssl: bool, examples: bool):
@@ -175,7 +234,12 @@ def main(input_file: Optional[str], output_file: Optional[str], status: bool,
             sys.exit(1)
     
     # Ensure at least one module is enabled
-    if not any([status, server, title]):
+    enabled_modules = [status, server, title, techstack, vhost, responsetime, faviconhash, 
+                      robots, js, auth, jsvuln, loginpanels, jwt, cname, iphistory, 
+                      httpmethods, port, ssl, headers, content, cors, cdn, length, 
+                      geoip, cms, waf, cloudassets, dirscan, wappalyzer, vulnscan]
+    
+    if not any(enabled_modules):
         if not silent:
             console.print("[yellow]No modules specified, enabling status check by default[/yellow]")
         status = True
@@ -205,6 +269,60 @@ def main(input_file: Optional[str], output_file: Optional[str], status: bool,
         scanner.enable_module('server')
     if title:
         scanner.enable_module('title')
+    if techstack:
+        scanner.enable_module('techstack')
+    if vhost:
+        scanner.enable_module('vhost')
+    if responsetime:
+        scanner.enable_module('responsetime')
+    if faviconhash:
+        scanner.enable_module('faviconhash')
+    if robots:
+        scanner.enable_module('robots')
+    if js:
+        scanner.enable_module('js')
+    if auth:
+        scanner.enable_module('auth')
+    if jsvuln:
+        scanner.enable_module('jsvuln')
+    if loginpanels:
+        scanner.enable_module('loginpanels')
+    if jwt:
+        scanner.enable_module('jwt')
+    if cname:
+        scanner.enable_module('cname')
+    if iphistory:
+        scanner.enable_module('iphistory')
+    if httpmethods:
+        scanner.enable_module('httpmethods')
+    if port:
+        scanner.enable_module('port')
+    if ssl:
+        scanner.enable_module('ssl')
+    if headers:
+        scanner.enable_module('headers')
+    if content:
+        scanner.enable_module('content')
+    if cors:
+        scanner.enable_module('cors')
+    if cdn:
+        scanner.enable_module('cdn')
+    if length:
+        scanner.enable_module('length')
+    if geoip:
+        scanner.enable_module('geoip')
+    if cms:
+        scanner.enable_module('cms')
+    if waf:
+        scanner.enable_module('waf')
+    if cloudassets:
+        scanner.enable_module('cloudassets')
+    if dirscan:
+        scanner.enable_module('dirscan')
+    if wappalyzer:
+        scanner.enable_module('wappalyzer')
+    if vulnscan:
+        scanner.enable_module('vulnscan')
     
     # Run the scan
     try:

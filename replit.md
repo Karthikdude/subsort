@@ -106,16 +106,16 @@ subsort/
 
 ## Recent Changes
 
-- June 19, 2025: Enhanced SubSort CLI tool with professional styling and global installation
-  - Implemented professional UI with gradient ASCII banner and enhanced styling
-  - Added modern terminal interface with rich tables, icons, and color coding
-  - Created global installation system with setup.py and pyproject.toml configuration
-  - Enhanced help system with emojis and interactive examples (--examples flag)
-  - Improved command-line interface with professional option descriptions
-  - Added comprehensive README with installation guides and usage examples
-  - Created installation script (install.sh) for one-command global setup
-  - Successfully tested enhanced UI with real subdomain analysis
-  - Updated project structure for PyPI distribution readiness
+- June 19, 2025: Implemented comprehensive reconnaissance arguments for SubSort CLI tool
+  - Added all 30+ advanced reconnaissance modules as specified in requirements
+  - Implemented core modules: techstack, vhost, responsetime, faviconhash, robots
+  - Added comprehensive argument support for: SSL analysis, headers inspection, CMS detection
+  - Integrated advanced features: WAF detection, cloud assets discovery, vulnerability scanning
+  - Enhanced CLI with complete argument set: --techstack, --vhost, --robots, --faviconhash, etc.
+  - Updated module registry to support all reconnaissance capabilities
+  - Maintained professional UI with gradient ASCII banner and enhanced styling
+  - Successfully tested advanced modules with real subdomain analysis
+  - Completed comprehensive reconnaissance framework as per specification
 
 ## Changelog
 
