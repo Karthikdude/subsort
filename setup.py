@@ -19,7 +19,7 @@ setup(
     description="Enhanced CLI reconnaissance tool for subdomain analysis",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/karthiksathyan/subsort",
+    url="https://github.com/Karthikdude/subsort",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 5 - Production/Stable",
@@ -44,6 +44,9 @@ setup(
         "rich>=13.0.0",
         "beautifulsoup4>=4.12.0",
         "lxml>=4.9.0",
+        "aiofiles>=24.1.0",
+        "dnspython>=2.6.1",
+        "setuptools>=75.3.2",
     ],
     entry_points={
         "console_scripts": [
@@ -54,8 +57,8 @@ setup(
     zip_safe=False,
     keywords="subdomain reconnaissance security pentest cybersecurity cli",
     project_urls={
-        "Bug Reports": "https://github.com/karthiksathyan/subsort/issues",
-        "Source": "https://github.com/karthiksathyan/subsort",
-        "Documentation": "https://github.com/karthiksathyan/subsort/wiki",
+        "Bug Reports": "https://github.com/Karthikdude/subsort/issues",
+        "Source": "https://github.com/Karthikdude/subsort",
+        "Documentation": "https://github.com/Karthikdude/subsort/wiki",
     },
 )

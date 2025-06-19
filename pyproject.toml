@@ -41,10 +41,10 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/karthiksathyan/subsort"
-Repository = "https://github.com/karthiksathyan/subsort"
-Issues = "https://github.com/karthiksathyan/subsort/issues"
-Documentation = "https://github.com/karthiksathyan/subsort/wiki"
+Homepage = "https://github.com/Karthikdude/subsort"
+Repository = "https://github.com/Karthikdude/subsort"
+Issues = "https://github.com/Karthikdude/subsort/issues"
+Documentation = "https://github.com/Karthikdude/subsort/wiki"
 
 [project.scripts]
 subsort = "subsort.cli:main"

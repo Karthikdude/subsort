@@ -18,9 +18,41 @@ A high-performance Python-based CLI reconnaissance tool for comprehensive subdom
 
 ## Available Modules
 
+### Core Analysis Modules
 - **Status Module** (`--status`): HTTP status codes and connectivity checking with visual indicators
 - **Server Module** (`--server`): Server technology identification, security headers, and CDN detection
 - **Title Module** (`--title`): Page title extraction, content analysis, and framework detection
+
+### Advanced Reconnaissance Modules
+- **Tech Stack Detection** (`--techstack`): Detect and sort subdomains based on their technology stack
+- **Virtual Host Detection** (`--vhost`): Perform virtual host-based detection and save accordingly
+- **Response Time Analysis** (`--responsetime`): Measure response times and sort subdomains based on latency
+- **Favicon Hash Generation** (`--faviconhash`): Generate favicon hashes for Shodan-style reconnaissance
+- **Robots.txt Analysis** (`--robots`): Fetch and parse robots.txt and sitemap.xml for hidden endpoints
+- **JavaScript Extraction** (`--js`): Extract and download linked JavaScript files for analysis
+- **Authentication Detection** (`--auth`): Detect presence of login portals or authentication-requiring endpoints
+- **JavaScript Vulnerability Scan** (`--jsvuln`): Identify outdated/vulnerable JavaScript libraries and versions
+- **Login Panel Detection** (`--loginpanels`): Detect and list login portals and auth forms across subdomains
+- **JWT Token Analysis** (`--jwt`): Extract and decode JWT tokens from headers or responses
+- **CNAME Record Check** (`--cname`): Check CNAME records for possible subdomain takeover
+
+### Security & Infrastructure Modules
+- **IP History** (`--iphistory`): Check historical IP records to track infrastructure changes
+- **HTTP Methods** (`--httpmethods`): Discover supported HTTP methods like OPTIONS, PUT, DELETE
+- **Port Scanning** (`--port`): Perform port scanning and group based on open ports
+- **SSL Certificate Analysis** (`--ssl`): Collect SSL certificate details (expiry, CN, issuer)
+- **Security Headers** (`--headers`): Analyze and store security-related headers like CSP, HSTS
+- **Content Analysis** (`--content`): Sort based on Content-Type (text/html, application/json, etc.)
+- **CORS Detection** (`--cors`): Detect CORS configuration issues or wildcards
+- **CDN Detection** (`--cdn`): Identify and group based on CDN or hosting provider
+- **Content Length Analysis** (`--length`): Sort subdomains based on Content-Length or response similarity
+- **GeoIP Analysis** (`--geoip`): Sort based on country, ASN, or IP origin
+- **CMS Detection** (`--cms`): Detect CMS (e.g., WordPress, Joomla) and organize results
+- **WAF Detection** (`--waf`): Detect WAF and categorize accordingly (e.g., Cloudflare, Akamai)
+- **Cloud Assets Discovery** (`--cloudassets`): Discover exposed S3 buckets, Azure blobs, or Google Cloud storage
+- **Directory Scanning** (`--dirscan`): Discover common endpoints/directories (/admin, /api, etc.)
+- **Wappalyzer Integration** (`--wappalyzer`): Use Wappalyzer to identify frontend/backend technologies
+- **Vulnerability Scanning** (`--vulnscan`): Run vulnerability fingerprints using custom signatures
 
 ## Global Installation
 
@@ -28,7 +60,7 @@ A high-performance Python-based CLI reconnaissance tool for comprehensive subdom
 
 ```bash
 # Clone the repository
-git clone https://github.com/karthiksathyan/subsort.git
+git clone https://github.com/Karthikdude/subsort.git
 cd subsort
 
 # Run the installation script
@@ -40,7 +72,7 @@ chmod +x install.sh
 
 ```bash
 # Install from source
-git clone https://github.com/karthiksathyan/subsort.git
+git clone https://github.com/Karthikdude/subsort.git
 cd subsort
 pip install -e .
 
@@ -52,7 +84,7 @@ pip install subsort-cli
 
 ```bash
 # For development
-git clone https://github.com/karthiksathyan/subsort.git
+git clone https://github.com/Karthikdude/subsort.git
 cd subsort
 pip install -e .
 ```
@@ -276,14 +308,14 @@ Log files are automatically created in the `logs/` directory with timestamps.
 
 ```bash
 # Download and install in one command
-curl -sSL https://raw.githubusercontent.com/karthiksathyan/subsort/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/Karthikdude/subsort/main/install.sh | bash
 ```
 
 ### Manual Installation Steps
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/karthiksathyan/subsort.git
+   git clone https://github.com/Karthikdude/subsort.git
    cd subsort
    ```
 
@@ -304,7 +336,7 @@ For developers who want to contribute:
 
 ```bash
 # Clone and install in development mode
-git clone https://github.com/karthiksathyan/subsort.git
+git clone https://github.com/Karthikdude/subsort.git
 cd subsort
 pip install -e .
 

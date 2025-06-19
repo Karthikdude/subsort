@@ -49,6 +49,18 @@ fi
 
 echo
 echo "✅ Installation completed successfully!"
+echo "🚀 You can now use 'subsort' command globally"
+echo
+echo "📚 Quick start:"
+echo "   subsort --help"
+echo "   subsort --examples"
+echo "   echo 'google.com' | subsort --status"
+echo
+echo "🌐 Repository: https://github.com/Karthikdude/subsort"stall subsort-cli
+fi
+
+echo
+echo "✅ Installation completed successfully!"
 echo
 echo "🎯 SubSort is now available globally as 'subsort' command"
 echo
