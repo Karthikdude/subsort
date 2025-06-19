@@ -65,10 +65,16 @@ class SubdomainScanner:
                     self.logger.debug(f"Running module {module_name} for {subdomain}")
                     
                     # Create a timeout for each module to prevent hanging
-                    module_result = await asyncio.wait_for(
-                        module_instance.scan(subdomain),
-                        timeout=self.config.get('timeout', 5) * 2  # Double the HTTP timeout for module timeout
-                    )
+                    if hasattr(module_instance, 'safe_scan'):
+                        module_result = await asyncio.wait_for(
+                            module_instance.safe_scan(subdomain),
+                            timeout=self.config.get('timeout', 5) * 2
+                        )
+                    else:
+                        module_result = await asyncio.wait_for(
+                            module_instance.scan(subdomain),
+                            timeout=self.config.get('timeout', 5) * 2
+                        )
                     
                     if module_result:
                         result.update(module_result)

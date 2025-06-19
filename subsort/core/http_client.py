@@ -218,18 +218,18 @@ class AsyncHttpClient:
 
         return None
 
-    async def get(self, url: str, **kwargs) -> Tuple[Optional[aiohttp.ClientResponse], Optional[str]]:
+    async def get(self, url: str, **kwargs) -> Tuple[Optional[Dict[str, Any]], Optional[str]]:
         """Make GET request"""
         result = await self.make_request(url, 'GET', **kwargs)
-        if result:
-            return result['status_code'], result['content']
+        if result and 'status_code' in result:
+            return result, result.get('content', '')
         return None, None
 
-    async def head(self, url: str, **kwargs) -> Tuple[Optional[aiohttp.ClientResponse], Optional[str]]:
+    async def head(self, url: str, **kwargs) -> Tuple[Optional[Dict[str, Any]], Optional[str]]:
         """Make HEAD request"""
-        result =  await self.make_request(url, 'HEAD', **kwargs)
-        if result:
-            return result['status_code'], result['content']
+        result = await self.make_request(url, 'HEAD', **kwargs)
+        if result and 'status_code' in result:
+            return result, result.get('content', '')
         return None, None
 
     def format_url(self, subdomain: str, scheme: str = 'https') -> str:
@@ -238,7 +238,7 @@ class AsyncHttpClient:
             return f"{scheme}://{subdomain}"
         return subdomain
 
-    async def check_both_schemes(self, subdomain: str) -> Tuple[Optional[aiohttp.ClientResponse], Optional[str], str]:
+    async def check_both_schemes(self, subdomain: str) -> Tuple[Optional[Dict[str, Any]], Optional[str], str]:
         """Check both HTTP and HTTPS schemes, return the working one"""
         schemes = ['https', 'http']
 
@@ -246,7 +246,7 @@ class AsyncHttpClient:
             url = self.format_url(subdomain, scheme)
             response, content = await self.get(url)
 
-            if response is not None:
+            if response is not None and response.get('status_code'):
                 self.logger.debug(f"Successfully connected to {url}")
                 return response, content, url
 
