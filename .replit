@@ -54,5 +54,23 @@ mode = "sequential"
 task = "shell.exec"
 args = "python main.py -i demo_subdomains.txt --status --techstack --vhost --responsetime --faviconhash --robots -o test_improved_results.txt -v --threads 20 --timeout 10"
 
+[[workflows.workflow]]
+name = "Test Status Code Filtering"
+author = 44017300
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python main.py -i demo_subdomains.txt --status -mc 200 -v"
+
+[[workflows.workflow]]
+name = "Test Individual Module Files"
+author = 44017300
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python main.py -i demo_subdomains.txt --status --server --techstack --individual -o test_with_individual.txt -v"
+
 [deployment]
 run = ["sh", "-c", "pip install aiohttp click rich beautifulsoup4 lxml && python main.py --help"]

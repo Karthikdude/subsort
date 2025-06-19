@@ -128,6 +128,10 @@ Developed by Karthik S Sathyan
               help='🔄 Follow HTTP redirects automatically (default: enabled)')
 @click.option('--ignore-ssl', is_flag=True, default=False,
               help='🔓 Ignore SSL certificate verification errors')
+@click.option('--individual', is_flag=True, default=False,
+              help='📂 Save individual module results as separate txt files')
+@click.option('-mc', '--match-code', type=int,
+              help='🎯 Filter results by specific HTTP status code (e.g., 200, 404)')
 @click.option('--examples', is_flag=True, default=False,
               help='📚 Show usage examples and exit')
 def main(input_file: Optional[str], output_file: Optional[str], status: bool,
@@ -140,7 +144,7 @@ def main(input_file: Optional[str], output_file: Optional[str], status: bool,
          retries: int, delay: float, verbose: bool, log_file: Optional[str], 
          output_format: str, no_color: bool, progress_bar: bool, 
          silent: bool, user_agent: str, follow_redirects: bool, 
-         ignore_ssl: bool, examples: bool):
+         ignore_ssl: bool, individual: bool, match_code: Optional[int], examples: bool):
     """
     SubSort - Enhanced CLI Reconnaissance Tool for subdomain analysis
     
@@ -169,6 +173,14 @@ def main(input_file: Optional[str], output_file: Optional[str], status: bool,
     \b
     # Silent operation for automation
     subsort -i domains.txt --status --silent
+    
+    \b
+    # Save individual module results
+    subsort -i domains.txt --status --server --individual
+    
+    \b
+    # Filter by status code
+    subsort -i domains.txt --status -mc 200
     
     \b
     📚 For more examples: subsort --examples
@@ -257,7 +269,7 @@ def main(input_file: Optional[str], output_file: Optional[str], status: bool,
     }
     
     # Initialize output manager
-    output_manager = OutputManager(output_file, output_format)
+    output_manager = OutputManager(output_file, output_format, individual, match_code)
     
     # Create and configure scanner
     scanner = SubdomainScanner(config, logger)

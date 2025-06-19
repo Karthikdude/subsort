@@ -130,11 +130,32 @@ subsort -i subdomains.txt --status --server --title -o report.csv --output-forma
 
 # Silent mode for automation
 subsort -i subdomains.txt --status --server --title --silent
+
+# Save individual module results as separate files
+subsort -i subdomains.txt --status --server --techstack --individual
+
+# Filter results by specific HTTP status code
+subsort -i subdomains.txt --status -mc 200
+
+# Combine filtering and individual files
+subsort -i subdomains.txt --status --server --title -mc 200 --individual -o results.txt
 ```
 
 ### Advanced Options
 
 ```bash
+# Save individual module results as separate files
+subsort -i subdomains.txt --status --server --techstack --individual
+
+# Filter by specific HTTP status code (only show 200 OK responses)
+subsort -i subdomains.txt --status -mc 200
+
+# Filter by error codes (only show 404 Not Found)
+subsort -i subdomains.txt --status -mc 404
+
+# Combine filtering with individual module files
+subsort -i subdomains.txt --status --server --title -mc 200 --individual
+
 # Verbose logging with custom user agent
 subsort -i subdomains.txt --status --server --title -v --user-agent "CustomBot/1.0"
 

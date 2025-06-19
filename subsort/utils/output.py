@@ -12,9 +12,12 @@ from datetime import datetime
 class OutputManager:
     """Manages output formatting and saving for scan results"""
     
-    def __init__(self, output_file: Optional[str] = None, output_format: str = 'txt'):
+    def __init__(self, output_file: Optional[str] = None, output_format: str = 'txt', 
+                 individual: bool = False, match_code: Optional[int] = None):
         self.output_file = output_file
         self.output_format = output_format.lower()
+        self.individual = individual
+        self.match_code = match_code
         
     def save_results(self, results: List[Dict[str, Any]], enabled_modules: List[str]):
         """
@@ -25,22 +28,40 @@ class OutputManager:
             enabled_modules: List of enabled module names
         """
         
+        # Filter results by status code if specified
+        filtered_results = self._filter_by_status_code(results)
+        
         if self.output_file:
             # Save to file
             output_path = Path(self.output_file)
             output_path.parent.mkdir(parents=True, exist_ok=True)
             
             if self.output_format == 'json':
-                self._save_json(results, output_path)
+                self._save_json(filtered_results, output_path)
             elif self.output_format == 'csv':
-                self._save_csv(results, output_path, enabled_modules)
+                self._save_csv(filtered_results, output_path, enabled_modules)
             else:  # txt format
-                self._save_txt(results, output_path, enabled_modules)
-                # Also save individual module files
-                self._save_individual_module_files(results, output_path, enabled_modules)
+                self._save_txt(filtered_results, output_path, enabled_modules)
+                
+                # Save individual module files only if requested
+                if self.individual:
+                    self._save_individual_module_files(filtered_results, output_path, enabled_modules)
         else:
             # Print to console
-            self._print_results(results, enabled_modules)
+            self._print_results(filtered_results, enabled_modules)
+    
+    def _filter_by_status_code(self, results: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """Filter results by status code if match_code is specified"""
+        if self.match_code is None:
+            return results
+        
+        filtered = []
+        for result in results:
+            status_code = result.get('status_code')
+            if status_code == self.match_code:
+                filtered.append(result)
+        
+        return filtered
     
     def _save_json(self, results: List[Dict[str, Any]], output_path: Path):
         """Save results in JSON format"""
@@ -173,6 +194,8 @@ class OutputManager:
         
         console.print(table)
         console.print(f"\n[blue]Total: {len(results)} subdomains processed[/blue]")
+        if self.match_code:
+            console.print(f"[yellow]Filtered by status code: {self.match_code}[/yellow]")
     
     def _save_individual_module_files(self, results: List[Dict[str, Any]], output_path: Path, enabled_modules: List[str]):
         """Save individual result files for each module"""
@@ -207,6 +230,8 @@ class OutputManager:
                         f.write(f"SubSort {module.title()} Module Results\n")
                         f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
                         f.write(f"Total Subdomains: {len(results)}\n")
+                        if self.match_code:
+                            f.write(f"Filtered by Status Code: {self.match_code}\n")
                         f.write("-" * 60 + "\n\n")
                         
                         for result in results:
