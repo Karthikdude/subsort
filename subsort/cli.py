@@ -28,10 +28,10 @@ def print_banner():
 \___ \| | | | '_ \\___ \ / _ \| '__| __|
  ___) | |_| | |_) |___) | (_) | |  | |_ 
 |____/ \__,_|_.__/|____/ \___/|_|   \__|
+
+Enhanced CLI Recon Tool v1.0.0
+Developed by Karthik S Sathyan
 """
-    print("Enhanced CLI Recon Tool v1.0.0")
-    print("Developed by Karthik S Sathyan")
-    """
     console.print(Panel(Text(banner, style="cyan bold"), border_style="blue"))
 
 @click.command(context_settings=dict(help_option_names=['-h', '--help']))
