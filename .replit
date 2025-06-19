@@ -2,6 +2,7 @@ modules = ["python-3.11"]
 
 [nix]
 channel = "stable-24_05"
+packages = ["cacert", "xcodebuild", "zlib"]
 
 [workflows]
 runButton = "SubSort CLI Tool"
@@ -34,6 +35,15 @@ author = "agent"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "pip install aiohttp click rich beautifulsoup4 lxml && python main.py --help"
+
+[[workflows.workflow]]
+name = "Test New Modules"
+author = 44017300
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python main.py -i test_subdomains.txt --status --js --auth --jsvuln --loginpanels --jwt --cname -v"
 
 [deployment]
 run = ["sh", "-c", "pip install aiohttp click rich beautifulsoup4 lxml && python main.py --help"]

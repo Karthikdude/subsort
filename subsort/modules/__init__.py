@@ -11,6 +11,12 @@ from .vhost import VhostModule
 from .responsetime import ResponsetimeModule
 from .faviconhash import FaviconhashModule
 from .robots import RobotsModule
+from .js import JsModule
+from .auth import AuthModule
+from .jsvuln import JsvulnModule
+from .loginpanels import LoginpanelsModule
+from .jwt import JwtModule
+from .cname import CnameModule
 
 # Module registry
 MODULES = {
@@ -22,13 +28,13 @@ MODULES = {
     'responsetime': ResponsetimeModule,
     'faviconhash': FaviconhashModule,
     'robots': RobotsModule,
+    'js': JsModule,
+    'auth': AuthModule,
+    'jsvuln': JsvulnModule,
+    'loginpanels': LoginpanelsModule,
+    'jwt': JwtModule,
+    'cname': CnameModule,
     # Placeholder modules for advanced features - using StatusModule as base
-    'js': StatusModule,
-    'auth': StatusModule,
-    'jsvuln': StatusModule,
-    'loginpanels': StatusModule,
-    'jwt': StatusModule,
-    'cname': StatusModule,
     'iphistory': StatusModule,
     'httpmethods': StatusModule,
     'port': StatusModule,
