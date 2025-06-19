@@ -142,4 +142,3 @@ class TitleModule(BaseModule):
                 if description:
                     return description
         return ""
-```
