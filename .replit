@@ -45,5 +45,14 @@ mode = "sequential"
 task = "shell.exec"
 args = "python main.py -i test_subdomains.txt --status --js --auth --jsvuln --loginpanels --jwt --cname -v"
 
+[[workflows.workflow]]
+name = "Test Improved Modules"
+author = 44017300
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python main.py -i demo_subdomains.txt --status --techstack --vhost --responsetime --faviconhash --robots -o test_improved_results.txt -v --threads 20 --timeout 10"
+
 [deployment]
 run = ["sh", "-c", "pip install aiohttp click rich beautifulsoup4 lxml && python main.py --help"]

@@ -36,6 +36,8 @@ class OutputManager:
                 self._save_csv(results, output_path, enabled_modules)
             else:  # txt format
                 self._save_txt(results, output_path, enabled_modules)
+                # Also save individual module files
+                self._save_individual_module_files(results, output_path, enabled_modules)
         else:
             # Print to console
             self._print_results(results, enabled_modules)
@@ -171,3 +173,63 @@ class OutputManager:
         
         console.print(table)
         console.print(f"\n[blue]Total: {len(results)} subdomains processed[/blue]")
+    
+    def _save_individual_module_files(self, results: List[Dict[str, Any]], output_path: Path, enabled_modules: List[str]):
+        """Save individual result files for each module"""
+        try:
+            # Create a directory for module results
+            module_dir = output_path.parent / f"{output_path.stem}_modules"
+            module_dir.mkdir(exist_ok=True)
+            
+            # Define module field mappings
+            module_fields = {
+                'status': ['status_code', 'status_message', 'url', 'accessible'],
+                'server': ['server', 'security_headers'],
+                'title': ['title', 'content_length'],
+                'techstack': ['technologies', 'web_server', 'programming_language', 'framework', 'cms', 'cdn', 'security', 'analytics', 'frontend'],
+                'vhost': ['is_vhost', 'vhost_type', 'shared_ip', 'host_headers', 'vhost_indicators', 'alternative_hosts'],
+                'responsetime': ['response_time', 'response_times', 'average_response_time', 'min_response_time', 'max_response_time', 'latency_category', 'connection_time', 'ttfb'],
+                'faviconhash': ['favicon_hash', 'favicon_mmh3', 'favicon_md5', 'technology_match', 'favicon_url', 'favicon_size', 'favicon_accessible'],
+                'robots': ['robots_accessible', 'robots_content', 'disallowed_paths', 'allowed_paths', 'crawl_delay', 'sitemap_urls', 'sitemaps_found', 'interesting_paths', 'user_agents'],
+                'js': ['js_files', 'js_technologies', 'js_frameworks', 'js_libraries', 'external_js', 'inline_js', 'js_errors'],
+                'auth': ['requires_auth', 'auth_type', 'auth_headers', 'login_form', 'auth_endpoints'],
+                'jsvuln': ['vulnerable_js', 'js_versions', 'vulnerability_details', 'severity_levels', 'cve_references'],
+                'loginpanels': ['login_panels', 'form_fields', 'auth_methods', 'login_endpoints', 'panel_types'],
+                'jwt': ['jwt_tokens', 'jwt_headers', 'jwt_payloads', 'jwt_algorithms', 'jwt_expiry'],
+                'cname': ['cname_records', 'takeover_possible', 'provider_info', 'dns_status', 'vulnerability_risk']
+            }
+            
+            for module in enabled_modules:
+                if module in module_fields:
+                    module_file = module_dir / f"{module}_results.txt"
+                    
+                    with open(module_file, 'w', encoding='utf-8') as f:
+                        f.write(f"SubSort {module.title()} Module Results\n")
+                        f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+                        f.write(f"Total Subdomains: {len(results)}\n")
+                        f.write("-" * 60 + "\n\n")
+                        
+                        for result in results:
+                            subdomain = result.get('subdomain', 'Unknown')
+                            f.write(f"Subdomain: {subdomain}\n")
+                            
+                            # Write module-specific fields
+                            found_data = False
+                            for field in module_fields[module]:
+                                if field in result and result[field] is not None:
+                                    found_data = True
+                                    value = result[field]
+                                    if isinstance(value, (list, dict)):
+                                        f.write(f"  {field.replace('_', ' ').title()}: {json.dumps(value, indent=2)}\n")
+                                    else:
+                                        f.write(f"  {field.replace('_', ' ').title()}: {value}\n")
+                            
+                            if not found_data:
+                                f.write(f"  No {module} data available\n")
+                            
+                            f.write("\n")
+                    
+                    print(f"Saved {module} results to: {module_file}")
+                    
+        except Exception as e:
+            print(f"Error saving individual module files: {e}")
