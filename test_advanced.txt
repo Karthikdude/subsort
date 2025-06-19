@@ -1,0 +1,211 @@
+SubSort Scan Results
+Generated: 2025-06-19 08:14:12
+Total Subdomains: 5
+Enabled Modules: techstack, vhost, responsetime, faviconhash, robots
+--------------------------------------------------------------------------------
+
+Subdomain: google.com
+  Technologies: ["iis", "googlecloud"]
+  Web Server: iis
+  Programming Language: None
+  Framework: None
+  Cms: None
+  Cdn: googlecloud
+  Security: []
+  Analytics: []
+  Frontend: []
+  Is Vhost: True
+  Vhost Type: wildcard_vhost
+  Shared Ip: None
+  Host Headers: {}
+  Vhost Indicators: ["multiple_domains_in_content"]
+  Alternative Hosts: [{"host": "example.com", "status": 404, "title": "Error 404 (Not Found)!!1", "content_length": 1557}, {"host": "test.local", "status": 404, "title": "Error 404 (Not Found)!!1", "content_length": 1557}, {"host": "nonexistent.domain.com", "status": 404, "title": "Error 404 (Not Found)!!1", "content_length": 1557}, {"host": "google-com.test", "status": 404, "title": "Error 404 (Not Found)!!1", "content_length": 1557}]
+  Response Time: 188.74859809875488
+  Response Times: [188.74859809875488, 185.27579307556152, 201.69520378112793]
+  Average Response Time: 191.9065316518148
+  Min Response Time: 185.27579307556152
+  Max Response Time: 201.69520378112793
+  Latency Category: good
+  Connection Time: None
+  Ttfb: None
+  Favicon Hash: None
+  Favicon Mmh3: None
+  Favicon Md5: None
+  Technology Match: None
+  Favicon Url: None
+  Favicon Size: None
+  Favicon Accessible: False
+  Robots Accessible: False
+  Robots Content: None
+  Disallowed Paths: []
+  Allowed Paths: []
+  Crawl Delay: None
+  Sitemap Urls: []
+  Sitemaps Found: []
+  Interesting Paths: []
+  User Agents: []
+
+Subdomain: github.com
+  Technologies: ["iis", "rails", "shopify", "aws", "azure", "googlecloud", "react"]
+  Web Server: iis
+  Programming Language: None
+  Framework: rails
+  Cms: shopify
+  Cdn: aws
+  Security: []
+  Analytics: []
+  Frontend: ["react"]
+  Is Vhost: False
+  Vhost Type: None
+  Shared Ip: None
+  Host Headers: {}
+  Vhost Indicators: ["multiple_domains_in_content"]
+  Alternative Hosts: []
+  Response Time: 29.542207717895508
+  Response Times: [29.542207717895508, 29.665708541870117, 28.599023818969727]
+  Average Response Time: 29.268980026245117
+  Min Response Time: 28.599023818969727
+  Max Response Time: 29.665708541870117
+  Latency Category: excellent
+  Connection Time: None
+  Ttfb: None
+  Favicon Hash: None
+  Favicon Mmh3: None
+  Favicon Md5: None
+  Technology Match: None
+  Favicon Url: None
+  Favicon Size: None
+  Favicon Accessible: False
+  Robots Accessible: False
+  Robots Content: None
+  Disallowed Paths: []
+  Allowed Paths: []
+  Crawl Delay: None
+  Sitemap Urls: []
+  Sitemaps Found: []
+  Interesting Paths: []
+  User Agents: []
+
+Subdomain: stackoverflow.com
+  Technologies: ["apache", "nginx", "iis", "tomcat", "php", "nodejs", "django", "flask", "rails", "laravel", "spring", "wordpress", "drupal", "joomla", "magento", "cloudflare", "googlecloud", "googleanalytics", "gtm", "react", "angular", "vue", "jquery", "bootstrap"]
+  Web Server: apache
+  Programming Language: php
+  Framework: django
+  Cms: wordpress
+  Cdn: cloudflare
+  Security: ["cloudflare"]
+  Analytics: ["googleanalytics", "gtm"]
+  Frontend: ["react", "angular", "vue", "jquery", "bootstrap"]
+  Is Vhost: True
+  Vhost Type: wildcard_vhost
+  Shared Ip: None
+  Host Headers: {}
+  Vhost Indicators: ["multiple_domains_in_content"]
+  Alternative Hosts: [{"host": "example.com", "status": 403, "title": "403 Forbidden", "content_length": 151}, {"host": "test.local", "status": 403, "title": "403 Forbidden", "content_length": 151}, {"host": "nonexistent.domain.com", "status": 403, "title": "403 Forbidden", "content_length": 151}, {"host": "stackoverflow-com.test", "status": 403, "title": "403 Forbidden", "content_length": 151}]
+  Response Time: 208.24432373046875
+  Response Times: [208.24432373046875, 201.1575698852539, 196.73728942871094]
+  Average Response Time: 202.04639434814453
+  Min Response Time: 196.73728942871094
+  Max Response Time: 208.24432373046875
+  Latency Category: good
+  Connection Time: None
+  Ttfb: None
+  Favicon Hash: None
+  Favicon Mmh3: None
+  Favicon Md5: None
+  Technology Match: None
+  Favicon Url: None
+  Favicon Size: None
+  Favicon Accessible: False
+  Robots Accessible: False
+  Robots Content: None
+  Disallowed Paths: []
+  Allowed Paths: []
+  Crawl Delay: None
+  Sitemap Urls: []
+  Sitemaps Found: []
+  Interesting Paths: []
+  User Agents: []
+
+Subdomain: httpbin.org
+  Technologies: ["googlecloud", "react", "jquery"]
+  Web Server: None
+  Programming Language: None
+  Framework: None
+  Cms: None
+  Cdn: googlecloud
+  Security: []
+  Analytics: []
+  Frontend: ["react", "jquery"]
+  Is Vhost: False
+  Vhost Type: None
+  Shared Ip: None
+  Host Headers: {}
+  Vhost Indicators: ["multiple_domains_in_content"]
+  Alternative Hosts: []
+  Response Time: 373.5024929046631
+  Response Times: [373.5024929046631, 32.14836120605469, 35.167694091796875]
+  Average Response Time: 146.93951606750488
+  Min Response Time: 32.14836120605469
+  Max Response Time: 373.5024929046631
+  Latency Category: good
+  Connection Time: None
+  Ttfb: None
+  Favicon Hash: None
+  Favicon Mmh3: None
+  Favicon Md5: None
+  Technology Match: None
+  Favicon Url: None
+  Favicon Size: None
+  Favicon Accessible: False
+  Robots Accessible: False
+  Robots Content: None
+  Disallowed Paths: []
+  Allowed Paths: []
+  Crawl Delay: None
+  Sitemap Urls: []
+  Sitemaps Found: []
+  Interesting Paths: []
+  User Agents: []
+
+Subdomain: example.com
+  Technologies: []
+  Web Server: None
+  Programming Language: None
+  Framework: None
+  Cms: None
+  Cdn: None
+  Security: []
+  Analytics: []
+  Frontend: []
+  Is Vhost: True
+  Vhost Type: wildcard_vhost
+  Shared Ip: None
+  Host Headers: {}
+  Vhost Indicators: []
+  Alternative Hosts: [{"host": "test.local", "status": 400, "title": "Invalid URL", "content_length": 312}, {"host": "nonexistent.domain.com", "status": 400, "title": "Invalid URL", "content_length": 312}, {"host": "example-com.test", "status": 400, "title": "Invalid URL", "content_length": 312}]
+  Response Time: 182.69944190979004
+  Response Times: [182.69944190979004, 76.79152488708496, 29.471397399902344]
+  Average Response Time: 96.32078806559245
+  Min Response Time: 29.471397399902344
+  Max Response Time: 182.69944190979004
+  Latency Category: excellent
+  Connection Time: None
+  Ttfb: None
+  Favicon Hash: None
+  Favicon Mmh3: None
+  Favicon Md5: None
+  Technology Match: None
+  Favicon Url: None
+  Favicon Size: None
+  Favicon Accessible: False
+  Robots Accessible: False
+  Robots Content: None
+  Disallowed Paths: []
+  Allowed Paths: []
+  Crawl Delay: None
+  Sitemap Urls: []
+  Sitemaps Found: []
+  Interesting Paths: []
+  User Agents: []
+
