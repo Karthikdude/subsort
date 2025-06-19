@@ -5,7 +5,7 @@ channel = "stable-24_05"
 packages = ["cacert", "xcodebuild", "zlib"]
 
 [workflows]
-runButton = "SubSort CLI Tool"
+runButton = "Test Fixed SubSort"
 
 [[workflows.workflow]]
 name = "Project"
